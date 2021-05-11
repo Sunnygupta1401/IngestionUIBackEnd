@@ -27,7 +27,7 @@ public class ConfigService {
 
 	@Transactional
 	public void insertJsonConfig(String body, String pk) {
-		System.out.print("generateJson1");
+		System.out.print("generateJson1 "+body);
 		Config config = new Config();
 		config.setPk(pk);
 		config.setBody(body);
