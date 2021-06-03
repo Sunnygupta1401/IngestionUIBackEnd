@@ -1,8 +1,12 @@
 package org.ingestion.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.ingestion.demo.model.Audit;
+import org.ingestion.demo.model.AuditDetails;
 import org.ingestion.demo.model.Customer;
 import org.ingestion.demo.service.AuditService;
 import org.slf4j.Logger;
@@ -11,10 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 
 
@@ -56,6 +64,20 @@ public class AuditingController {
 
 	}*/
 	
+	
+	@PostMapping(path = "/addAuditDetails",headers = "Accept=application/json")
+	public ResponseEntity<String> addAuditDetails(@RequestBody List<AuditDetails> listAuditDetails){
+		try
+		{
+		auditService.addAuditDetails(listAuditDetails);
+				return new ResponseEntity<>("success", HttpStatus.OK);
+
+		}catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+	}
 	
 	
 }
