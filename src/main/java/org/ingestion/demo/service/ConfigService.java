@@ -78,9 +78,9 @@ public class ConfigService {
 	}
 	
 	public void triggerJob(String jsonPath) throws IOException {
-		String command="sh /home/hadoop/talend_app/run_Talend_ETL_Job.sh";
+		String command="/bin/sh";
 		
-		ProcessBuilder processBuilder = new ProcessBuilder(command,jsonPath);
+		ProcessBuilder processBuilder = new ProcessBuilder(command,"/home/hadoop/talend_app/run_Talend_ETL_Job.sh",jsonPath);
 		Process process=processBuilder.start();
 		String output="";
 		processBuilder.redirectErrorStream(true);
@@ -90,5 +90,6 @@ public class ConfigService {
 		
 		System.out.println(output);
 	}
+	
 
 }
